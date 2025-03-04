@@ -61,7 +61,7 @@
         </ul>
     </div>
 
-    <div class="section">
+    <div>
         <h2>使用说明</h2>
         <ul class="notes">
             <li>需要root权限运行。</li>
@@ -71,7 +71,7 @@
         </ul>
     </div>
 
-    <div class="section">
+    <div>
         <h2>注意事项</h2>
         <p class="warning">本程序仅限合法授权测试使用，请遵守当地法律法规。</p>
     </div>
